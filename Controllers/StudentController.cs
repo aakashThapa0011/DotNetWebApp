@@ -30,15 +30,14 @@ namespace DotNetWebApp.Controllers
 
         // POST api/<controller>
         [HttpPost]
-        public int Post(Students student)
+        public object Post([FromBody] Students student)
         {
-            Console.WriteLine(student);
             return obj.CreateStudent(student);
         }
 
         // PUT api/<controller>/5
         [HttpPut("{id}")]
-        public int Put(Students student)
+        public object Put([FromBody] Students student)
         {
             return obj.UpdateStudent(student);
         }
