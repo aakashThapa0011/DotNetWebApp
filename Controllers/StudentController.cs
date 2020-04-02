@@ -4,6 +4,7 @@ using System.Linq;
 using System.Threading.Tasks;
 using DotNetWebApp.Models;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.AspNetCore.Authorization;
 
 // For more information on enabling Web API for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
 
@@ -12,10 +13,11 @@ namespace DotNetWebApp.Controllers
     [Route("api/[Controller]")]
     public class StudentController : Controller
     {
-        StudentDAL obj = new StudentDAL();
+        readonly StudentDAL obj = new StudentDAL();
 
         // GET: api/<controller>
         [HttpGet]
+        [Authorize]
         public IEnumerable<Students> Get()
         {
             return obj.GetAllStudents();
@@ -23,6 +25,7 @@ namespace DotNetWebApp.Controllers
 
         // GET api/<controller>/5
         [HttpGet("{id}")]
+        [Authorize]
         public Students Get(int id)
         {
             return obj.GetStudentData(id);
@@ -30,6 +33,7 @@ namespace DotNetWebApp.Controllers
 
         // POST api/<controller>
         [HttpPost]
+        [Authorize]
         public object Post([FromBody] Students student)
         {
             return obj.CreateStudent(student);
@@ -37,6 +41,7 @@ namespace DotNetWebApp.Controllers
 
         // PUT api/<controller>/5
         [HttpPut("{id}")]
+        [Authorize]
         public object Put([FromBody] Students student)
         {
             return obj.UpdateStudent(student);
@@ -44,6 +49,7 @@ namespace DotNetWebApp.Controllers
 
         // DELETE api/<controller>/5
         [HttpDelete("{id}")]
+        [Authorize]
         public int Delete(int id)
         {
             return obj.DeleteStudent(id);
